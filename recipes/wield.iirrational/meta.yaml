@@ -1,0 +1,48 @@
+{% set name = "wield.iirrational" %}
+{% set version = "2.9.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/wield.iirrational-{{ version }}.tar.gz
+  sha256: 211415e1ed1e85c450372e27f8895c812da3b9bc019b3242ad534393ec93e741
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python
+    - setuptools >=45
+    - wheel
+    - "'setuptools>=45.0.0'"
+    - pip
+  run:
+    - python
+    - wield.bunch
+    - wield.utilities
+    - numpy
+    - scipy
+    - matplotlib
+
+test:
+  imports:
+    - wield.iirrational
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/wieldphysics/wield-iirrational
+  summary: SISO System Identification tool
+  license: Apache-2.0
+  license_file: LICENSES/
+
+extra:
+  recipe-maintainers:
+    - mccullerlp 
